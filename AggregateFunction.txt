@@ -1,0 +1,49 @@
+/* Aggreate function (sum,avg,min,max,count,math,datetime) */
+
+select * from customer;
+
+-- Sum() function
+select sum(grade) as TotalGrade from customer;
+
+select sum(grade) as TotalGrade from customer where grade<=200;
+
+-- Avg() function
+select avg(grade) as AvgGrade from customer;
+
+select avg(grade) as AvgGrade from customer where grade<= 200;
+
+-- Min() function
+select min(grade) as MinGrade from customer;
+
+select min(grade) as MinGrade from customer where grade>100;
+
+-- Max() function
+select max(grade) as maxGrade from customer;
+
+select max(grade) as maxGrade from customer where grade<300;
+
+-- Count() function
+select count(grade) as CountGrade from customer;
+
+select count(customer_id) as CountId from customer where grade>100;
+
+-- ABS() function
+select abs(grade) as AbsGrade from customer;
+
+--Degrees function
+select DEGREES(grade) as Degree from customer;
+
+--Floor function 
+select floor(grade) as FloorGrade from customer;
+
+--power function
+select power(grade,2) as PowerGrade from customer;
+
+--Rand function
+select rand(grade) as RandFun from customer;
+
+--Round function
+select round(453.265,1) as RoundGrade from customer;
+
+--Square function
+select square(grade) as SquareGrade from customer;

@@ -1,0 +1,19 @@
+/* CTE Demo (Common table expression) when we are create cte then it genreate temporary result set and it use immeditiaely with select,insert,update,delete query*/
+
+select * from customer;
+
+--First CTE
+with New_CTE
+as
+(
+	select * from customer where grade >= 200
+)
+select * from New_CTE;
+
+--second way
+with New_CTE2(customerId,salesmanId,grade)
+as
+(
+	select salesman_id,cust_name,sum(grade) from customer group by salesman_id,cust_name
+)
+select * from New_CTE2;

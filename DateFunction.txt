@@ -1,0 +1,73 @@
+/* Date function */
+select * from customer;
+
+--current_timestamp function
+select current_Timestamp as timecurrent from customer;
+
+--DateAdd function
+SELECT DATEADD(year, 1, '2017/08/25') AS DateAdd;
+
+--DateFormParts function
+select DATEFROMPARTS(2018,10,31) as DateFormParts;
+
+--DateDiff function
+select datediff(year,12-05-2015,05-10-2012) as DateDiff;
+
+--GetDate function
+select getdate() as GetDate;
+
+--day function
+select day(12-11-2015) as day;
+
+--Datename function
+select datename(year,'01-12-2013') as datename;
+
+--SysDatetime function
+select SYSDATETIME() as sysdate;
+
+--GetUTCDate function
+select GETUTCDATE() as getUTCDate
+
+--ISDate function
+select isdate('12/02/2023') as ISdate
+
+--month function
+select Month('2015/08/12') as month;
+
+--year function
+select year('12/11/2025') as year;
+
+
+
+
+----------------------------
+select * from EmployeeDetails;
+
+select EmpId,FullName,DateOfJoining,DATENAME(Weekday,DateOfJoining) as JoiningDay ,DATENAME(Year,DateOfJoining) as JoiningYear from EmployeeDetails;
+
+
+select getdate() as Date;
+
+select Year(getdate()) as year;
+
+select DATENAME(year,getdate()) as year;
+
+select FORMAT(getdate(),'yyyy') as day
+
+select datepart(day,'12/10/1999') as day;
+
+select datepart(month,'12/10/1999') as day;
+
+select datepart(year,'12/10/1999') as day;
+
+select DATEADD(day,2,getdate()) as Adddate;
+
+select DATEADD(month,2,getdate()) as Adddate;
+
+select DATEADD(year,2,getdate()) as Adddate;
+
+select DATEDIFF(Day,'10-20-1999',getdate()) as DiffDate;
+
+
+select CAST(getdate() as nvarchar) as date;
+select CONVERT(nvarchar,getdate(),103) as date;

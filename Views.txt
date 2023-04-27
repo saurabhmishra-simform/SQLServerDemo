@@ -1,0 +1,36 @@
+select * from Employee;
+select * from Projects;
+
+-- Create View based on employee table
+create view VEmployeeData
+AS
+select Id,Name,Salary from Employee where Department = 'IT';
+
+select * from VEmployeeData;
+
+-- Create Multiple table views 
+create view VEmployeeProject
+AS
+select E.Id,E.Name,P.Title,P.ProjectId from Employee E inner join Projects P on E.Id = P.EmployeeId;
+
+select * from VEmployeeProject;
+
+-- Update view 
+Update VEmployeeProject set Title = 'DotNet MVC Project' where Id = 1004;
+
+-- Update Views
+create view VClientView
+AS
+select Id,Name,Title,ClientId from Employee E inner join Projects P on E.Id = P.EmployeeId;
+
+select * from VClientView;
+select * from Projects;
+
+update VClientView set Title = 'Python Django Spring Project' where ClientId = 4;
+delete VClientView where Id = 1002;
+
+-- views indexing or materilized view
+create view VCountEmployeeSalaryDept
+with schemabinding
+As
+select Department,sum(Salary) as Salary from Employee E join Projects P on E.Id = P.ProjectId group by Department;

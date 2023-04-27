@@ -1,0 +1,8 @@
+--Assignment 2 count duplicate with stroed procedure
+create procedure USP_GetDuplicateCountWithDepartmentWise
+As
+Begin
+    select Id,Name,Department,Salary,Gender,Age,City,Count(Department) over(Partition by Department) as DepartmentWiseCount from Employee;
+End;
+-- call procedure
+USP_GetDuplicateCountWithDepartmentWise;

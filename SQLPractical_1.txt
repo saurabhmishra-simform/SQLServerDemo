@@ -1,0 +1,37 @@
+/*----- Create product table ------*/
+create table tblProduct(ProductId int not null primary key identity(1,1),ProductName nvarchar(500) not null,Category nvarchar(500) not null,Price decimal(18,2) not null check (Price>=0));
+
+/*----- Add new column in product table ------*/
+alter table tblProduct add Discription nvarchar(500) not null;
+
+/*----- Show product table structure ------*/
+select * from tblProduct
+
+/*----- Insert records in the product table ------*/
+insert into tblProduct values
+	('Rose','Flower',5.20,'The rose is flower.'),
+	('Realme','Mobile',15000,'The realme is mobile phone brand.'),
+	('Lotus','Flower',10.20,'The lotus is flower.'),
+	('Blood Bag','Health',799.56,'Blood bag is health product'),
+	('Poco','Mobile',16000,'The realme is mobile phone brand.'),
+	('SQL','Programming',1500.20,'The sql is programming language'),
+	('First aid kit','Health',699.99,'First aid kit is small health kit product'),
+	('Sunflower','Flower',16.20,'The sunflower is flower.'),
+	('Java','Programming',1000.20,'The java is programming language'),
+	('Walker','Health',999.99,'Walker is health product'),
+	('Oppo','Mobile',20000,'The oppo is mobile phone brand'),
+	('DotNet','Programming',499.25,'The dotnet is programming language'),
+	('Microscope','Health',1999.99,'Microscope is health product'),
+	('Jasmine','Flower',45.20,'The jasmine is flower.');
+
+/*----- Show all product witch belonging in health categrory ------*/
+select ProductId,ProductName,Category,Price,Discription from tblProduct where Category = 'health';
+
+/*----- Query for get total price of all product ------*/
+select sum(price) as TotalPrice from tblProduct;
+
+/*----- Query for display all product in descending order of price ------*/
+select ProductId,ProductName,Category,Price,Discription from tblProduct order by price desc;
+
+/*----- Query for display category wise product count having price greater than  10000 ------*/
+select Category,Count(Category) as ProductCount from tblProduct where Price > 10000 group by Category;

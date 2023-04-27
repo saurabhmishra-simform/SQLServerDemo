@@ -1,0 +1,34 @@
+create table tblHTML(HTML nvarchar(500) not null);
+
+insert into tblHTML values
+	('<html><b>Intime0</b><b>outtime1</b><i>Intime2</i><i>outtime3</i><u>intime4</u><u>outtime5</u></html>');
+
+select * from tblHTML;
+
+--Create Function
+create function FN_GetHTMLText(@Html nvarchar(100))returns nvarchar(200) as
+begin
+	declare @htmltext varchar(100);
+	SELECT @htmltext = CAST(@Html AS XML).value('.[1]', 'nvarchar(500)') ;
+	return @htmltext;
+end;
+
+--Call Function
+select dbo.Fn_GetHTMLText(Html) from tblHTML;
+
+
+
+
+CAST(@Html AS XML) converts the HTML string in the @Html variable into an XML data type, which allows it to be queried using XQuery functions.
+
+. [1] selects the first (and only) node in the XML document. The dot notation (".") refers to the current node, and the [1] 
+indicates that we want to select the first occurrence of that node.
+
+'nvarchar(max)' specifies the target data type for the result of the value method, which is an nvarchar string with a maximum length of 2^31-1 characters.
+
+value('.[1]', 'nvarchar(max)') extracts the value of the first (and only) node in the XML document, which is the entire HTML string.
+
+Finally, the result is assigned to the @htmltext variable.
+
+In summary, this query converts an HTML string into an XML data type, selects the first (and only) node in the XML document, 
+and extracts the value of that node as an nvarchar string, which is then stored in the @htmltext variable.

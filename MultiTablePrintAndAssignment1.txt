@@ -1,0 +1,24 @@
+--Assicement #1 Accroding to name
+create procedure USP_GetEmployeeDetail
+@CheckName varchar(20)
+AS
+Begin 
+	SELECT * FROM Employee WHERE EXISTS (select name from Employee where name = @CheckName);
+End;
+--Procedure Call
+USP_GetEmployeeDetail 'John Doe';
+
+--Multi table to find record with stroed procedure
+create procedure USP_GetAllDetailsForMultipleTable
+@GetTableValue int
+As
+Begin
+	if(@GetTableValue  = 1)
+		select * from Employee;
+	else if(@GetTableValue = 2)
+		select * from Student;
+	else if(@GetTableValue = 3)
+		select * from Projects;
+End;
+
+USP_GetAllDetailsForMultipleTable 1;

@@ -1,0 +1,28 @@
+/*filtering operation */
+
+select * from customer;
+select * from salesperson;
+
+select * from customer where salesman_id = 5001;
+
+select * from customer where city like '_e%';
+
+select * from customer where grade>100 and cust_name like 'J%';
+
+select count(customer_id) as CID from customer where grade>100;
+
+select cust_name from customer where Exists(select * from customer where grade>200);
+
+
+select cust_name from customer where city like '_e%' Union select name from salesperson where city like '_e%';
+
+select salesman_id from customer where city like '_e%' intersect select salesman_id from salesperson where city like '_e%';
+
+select * from customer where grade in (200,300);
+
+select * from customer where grade not in(200,300);
+
+select * from customer where grade between 100 and 200;
+
+
+

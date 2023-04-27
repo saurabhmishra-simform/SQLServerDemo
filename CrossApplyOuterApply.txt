@@ -1,0 +1,37 @@
+select * from Employee;
+
+select * from Department;
+
+--Script #1 - CROSS APPLY and INNER JOIN
+SELECT * FROM Department D CROSS APPLY ( SELECT * FROM Employee E WHERE E.DepartmentID = D.DepartmentID ) A;
+ 
+SELECT * FROM Department D INNER JOIN Employee E ON D.DepartmentID = E.DepartmentID 
+
+
+--Script #2 - OUTER APPLY and LEFT OUTER JOIN
+SELECT * FROM Department D OUTER APPLY ( SELECT * FROM Employee E WHERE E.DepartmentID = D.DepartmentID ) A; 
+ 
+SELECT * FROM Department D LEFT OUTER JOIN Employee E ON D.DepartmentID = E.DepartmentID; 
+
+
+--Script #4 - APPLY with table-valued function
+
+drop function fn_GetAllEmployeeOfADepartment;
+
+CREATE FUNCTION fn_GetAllEmployeeOfADepartment(@DeptID AS INT)  
+RETURNS TABLE 
+AS 
+RETURN 
+   ( 
+   SELECT * FROM Employee E 
+   WHERE E.DepartmentID = @DeptID 
+   ) 
+GO
+ 
+SELECT * FROM Department D 
+Cross apply dbo.fn_GetAllEmployeeOfADepartment(D.DepartmentID) 
+GO
+ 
+SELECT * FROM Department D 
+OUTER APPLY dbo.fn_GetAllEmployeeOfADepartment(D.DepartmentID) 
+GO 

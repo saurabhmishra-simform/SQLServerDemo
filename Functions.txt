@@ -1,0 +1,35 @@
+select * from Employee;
+select * from Projects;
+
+-- Scalar function 
+create function dbo.Fn_Salary(@Empid int) returns int 
+AS
+Begin
+	Declare @Sal int;
+	select @Sal = salary  from Employee where Id = @Empid;
+	return @Sal;
+end;
+
+select Name,dbo.Fn_Salary(Id) as Salary from Employee;
+
+-- Inline table valued function
+create function dbo.Fn_TableValued(@EmpId int) returns table
+As
+Return select Name,Department,Gender,Age,City from Employee where Id = @EmpId;
+
+drop function dbo.Fn_TableValued;
+
+select * from dbo.Fn_Tablevalued(1001);
+
+-- Multi statement table valued function
+create function Fn_MultiStatement()
+Returns @Table Table (Id int,ProjectTile nvarchar(500),Startdate date,Enddate date)
+As
+Begin
+	insert into @Table
+	select ProjectId,Title,Cast(StartDate as Date),Convert(date,EndDate,103) from Projects;
+	return;
+End;
+
+
+select * from Company.dbo.Fn_MultiStatement();

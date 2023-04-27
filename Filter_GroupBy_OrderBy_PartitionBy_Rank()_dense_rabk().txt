@@ -1,0 +1,37 @@
+/* sorting data*/
+select * from customer;
+
+select * from customer order by grade desc;
+
+select * from customer order by salesman_id asc;
+
+select * from customer where grade>100 order by salesman_id desc;
+
+select customer_id,city from customer where grade>100 order by city asc;
+
+select cust_name from customer where grade = 200 order by city desc;
+
+/* Group by */
+
+select salesman_id,sum(grade) as Grade from customer group by salesman_id;
+
+select salesman_id,Avg(grade) as AvgGrade from customer where grade>100 group by salesman_id;
+
+/* Having */
+
+select salesman_id,city,sum(grade) as grade from customer group by salesman_id,city having sum(grade)>200;
+
+select salesman_id,sum(grade) as grade from customer group by salesman_id having sum(grade)>200;
+
+/* Parition by , row_number(), rank(), danse_rank() */
+
+select ROW_NUMBER() over(partition by salesman_id order by salesman_id) as Id,salesman_id, grade from customer;
+
+select row_number() over(order by salesman_id) as Id, salesman_id,cust_name from customer where grade>100;
+
+select rank() over(order by salesman_id) as Id,cust_name,salesman_id from customer;
+
+select dense_rank() over(order by salesman_id) as SaleId, cust_name, salesman_id from customer;
+
+
+

@@ -1,0 +1,46 @@
+create table Department(DepartmentId int not null primary key identity(1,1),DepartmentName varchar(200) not null);
+
+create table Employee(EmployeeId int not null primary key identity(1,1),EmployeeName varchar(500) not null,
+DepartmentId int not null  references Department(DepartmentId),Experience int not null,Salary decimal not null);
+
+insert into Department values
+	('DotNet'),
+	('Java'),
+	('Python'),
+	('Node'),
+	('PHP');
+insert into Employee values
+	('Ram',3,3,50000),
+	('Ned Flanders',2,1,30000),
+	('Clancy Wiggum',1,2,50000),
+	('Homer Simpson',3,7,90000),
+	('Barney Gumble',1,5,75000),
+	('Kuldeep Rana',4,4,65000),
+	('Walter White',5,1,25000),
+	('John Snow',3,8,90000),
+	('Ramesh Kumar',5,2,80000),
+	('Uncle Bob',4,3,60000),
+	('Jimiy',2,4,40000);
+
+select * from Department;
+select * from Employee;
+select EmployeeId,EmployeeName,DepartmentName from Employee Emp inner join Department Dept on Emp.DepartmentId = Dept.DepartmentId;
+
+select DepartmentName,count(DepartmentName) as EmployeeCount from Employee Emp full join Department Dept on Emp.DepartmentId = Dept.DepartmentId group by DepartmentName;
+
+select DepartmentName,max(Salary) as MaxSalary from Employee Emp full join Department Dept on Emp.DepartmentId = Dept.DepartmentId group by DepartmentName;
+
+select EmployeeName,DepartmentName from Employee Emp full join Department Dept on Emp.DepartmentId = Dept.DepartmentId order by DepartmentName desc;
+
+select EmployeeName, 
+	case when Experience>10
+	Then 'Expert'
+	when Experience>7  
+	Then 'Advanced'
+	when Experience>5
+	Then 'Intermediate'
+	when Experience >2 
+	Then 'Beginner'
+	Else 'Novice'
+	end as grade from employee;   
+ 

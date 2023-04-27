@@ -1,0 +1,6 @@
+-- Multiple Column sorting
+
+SELECT EmployeeName,DepartmentName,Salary FROM Employee Emp 
+INNER JOIN Department Dept 
+ON Emp.DepartmentId = Dept.DepartmentId 
+ORDER BY DepartmentName ASC,Salary DESC;

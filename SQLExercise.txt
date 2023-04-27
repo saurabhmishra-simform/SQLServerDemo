@@ -1,0 +1,54 @@
+/*---------------Table SalesPerson Question 1-----------------*/
+
+create table salesperson(salesman_id int not null primary key,name nvarchar(50) not null,city nvarchar(50) not null,commission decimal not null);
+
+/*---------------Table Customer Question 1-----------------*/
+
+create table customer(customer_id int not null primary key,cust_name nvarchar(50) not null,city nvarchar(50) not null,grade int,salesman_id int not null);
+
+
+/*---------------Table NobelPrize Question 3-----------------*/
+
+create table NobelPrize(Year int not null,Subject nvarchar(30)not null,Category nvarchar(50) not null,Winner nvarchar(50) not null,Country nvarchar(30) not null);
+
+/*---------------Add Foreign key in customer Table-----------------*/
+Alter table customer add constraint customer_salesmanId_FK Foreign key(salesman_id) references salesperson(salesman_id); 
+
+/*---------------Insert Data Salesperson Table-----------------*/
+INSERT INTO salesperson VALUES
+  (5001,'James Hoog','New York',0.15),
+  (5002,'Nail Knite','Paris',0.13),
+  (5005,'Pit Alex','London',0.11),
+  (5006,'Mc Lyon','Paris',0.14),
+  (5007,'Paul Adam','Rome',0.13),
+  (5003,'Lauson Hen','San Jose',0.12);
+
+/*---------------Insert Data customer Table-----------------*/
+INSERT INTO customer VALUES
+  (3002,'Nick Rimando','New York',100,5001),
+  (3007,'Brad Davis','New York',200,5001),
+  (3005,'Graham Zusi','California',200,5002),
+  (3008,'Julian Green','London',300,5002),
+  (3004,'Fabian Johnson','Paris',300,5006),
+  (3009,'Geoff Cameron','Berlin',100,5003),
+  (3003,'Jozy Altidor','Moscow',200,5007),
+  (3001,'Brad Guzan','London',null,5005);
+
+/*---------------Insert Data NobelPrize Table-----------------*/
+INSERT INTO NobelPrize VALUES
+  (1970,'Physics','Scientist','Hannes Alfven','Sweden'),
+  (1970,'Physics','Scientist','Louis Neel','France'),
+  (1970,'Chemistry','Scientist','Luis Federico Leloir','France'),
+  (1970,'Physiology','Scientist','Ulf von Euler','Sweden'),
+  (1970,'Physiology','Scientist','Bernard Katz','Germany');
+
+/*---------------Question 1 Answer-----------------*/
+select name,city from salesperson where city = 'Paris';
+
+/*---------------Question 2 Answer-----------------*/
+select * from customer where grade = 200;
+
+/*---------------Question 3 Answer-----------------*/
+select year,subject,winner from NobelPrize where YEAR = 1970;
+
+  

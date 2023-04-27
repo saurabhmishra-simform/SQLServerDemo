@@ -1,0 +1,33 @@
+create table tblStudent 
+(
+	Id int not null Primary key,
+	Name nvarchar(50) not null,
+	Email nvarchar(50) not null,
+	GenderId int,
+)
+
+create table tblGender
+(Id int not null Primary key,Gender nvarchar(50))
+
+
+insert into tblStudent values(1,'Bob','bob@gmail.com',1);
+insert into tblStudent values(2,'Uncle','uncle@gmail.com',2);
+insert into tblStudent values(3,'Ram','ram@gmail.com',null);
+insert into tblStudent values(4,'Ramesh','ramesh@gmail.com',3);
+insert into tblStudent values(5,'Suresh','suresh@gmail.com',null);
+
+select * from tblStudent;
+
+insert into tblGender values(1,'male');
+insert into tblGender values(2,'female');
+insert into tblGender values(3,'unknow');
+
+select * from tblGender;
+
+**Foreign key------
+Alter table tblStudent add constraint tblStudent_GenderId_FK
+Foreign key (Gender) references tblGender(Gender);
+
+
+/* data type alter */
+alter table product alter column price decimal(18,2) not null;

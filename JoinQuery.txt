@@ -1,0 +1,29 @@
+select * from customer;
+
+select * from salesperson;
+
+/* Inner Join */
+select customer_id,cust_name,name,grade from customer inner join salesperson on customer.salesman_id = salesperson.salesman_id;
+
+/* self join */
+select c1.customer_id,c2.cust_name,c2.grade from customer c1,customer c2 where c1.customer_id<>c2.customer_id and c1.grade = c2.grade order by c2.grade;
+
+/* cross join */
+select * from customer cross join salesperson where grade>200;
+
+select customer_id,grade from customer cross join salesperson;
+
+/* outer join Left outer join*/
+select * from customer left outer join salesperson on customer.salesman_id = salesperson.salesman_id;
+
+select customer_id,customer.city,name,grade from customer left join salesperson on customer.salesman_id = salesperson.salesman_id where grade>200;
+
+/* Right join */
+select * from salesperson right join customer on customer.city = salesperson.city;
+
+select * from customer right join salesperson on customer.city = salesperson.city where grade>100;
+
+/* full join */
+select * from customer full join salesperson on customer.city = salesperson.city;
+
+select * from customer full join salesperson on customer.city = salesperson.city where grade>100;
